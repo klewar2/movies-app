@@ -8,19 +8,35 @@ import {
   Route,
   Redirect,
 } from 'react-router-dom';
+import { Container, Row, Col } from 'reactstrap';
+
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import 'react-toastify/dist/ReactToastify.css';
 import logo from './logo.svg';
 import Movies from './routes/Movies';
+import AddMovie from './routes/AddMovie';
+import Header from './components/Header';
+import UpdateMovie from './routes/UpdateMovie';
 
 const App = () => {
   return (
     <ApolloProvider client={apolloClient}>
       <Router>
-        <Switch>
-          <Route exact path="/" component={Movies} />
-          <Route path="*" render={() => <Redirect to={'/'} />} />
-        </Switch>
+        <Container>
+          <Header />
+          <Row>
+            <Col>
+              <Switch>
+                <Route exact path="/" component={Movies} />
+                <Route path="/movies/add" component={AddMovie} />
+                <Route path="/movies/:id/update" component={UpdateMovie} />
+                <Route path="*" render={() => <Redirect to={'/'} />} />
+              </Switch>
+            </Col>
+          </Row>
+        </Container>
       </Router>
       <ToastContainer
         position="top-center"

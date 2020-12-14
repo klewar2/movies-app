@@ -1,6 +1,6 @@
-import { gql } from 'apollo-server-express';
-import { ApolloServerExpressConfig } from 'apollo-server-express';
-import resolvers from '../resolvers';
+import { gql } from "apollo-server-express";
+import { ApolloServerExpressConfig } from "apollo-server-express";
+import resolvers from "../resolvers";
 
 const typeDefs = gql`
   type Query {
@@ -9,7 +9,7 @@ const typeDefs = gql`
   }
   type Mutation {
     createMovie(movieInput: MovieInput): Movie!
-    updateMovie(movieId: ID!, updateMovie: UpdateMovie): Movie!
+    updateMovie(movieId: ID!, updateMovie: MovieInput): Movie!
   }
   type Subscription {
     movieAdded: Movie
@@ -25,17 +25,13 @@ const typeDefs = gql`
     name: String!
     description: String
   }
-  input UpdateMovie {
-    name: String
-    description: String
-  }
 `;
 
 const schema: ApolloServerExpressConfig = {
   typeDefs,
   resolvers,
   introspection: true,
-  playground: true
+  playground: true,
 };
 
 export default schema;

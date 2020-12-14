@@ -1,7 +1,7 @@
-import Promise from "bluebird";
-import mongoose from "mongoose";
-import config from "./config";
-import Express from "./config/express";
+import Promise from 'bluebird';
+import mongoose from 'mongoose';
+import config from './config';
+import Express from './config/express';
 
 Promise.promisifyAll(mongoose);
 
@@ -12,10 +12,10 @@ mongoose.connect(config.db, {
   reconnectTries: 30,
   socketTimeoutMS: 0,
   useNewUrlParser: true,
-  useUnifiedTopology: true,
+  useUnifiedTopology: true
 });
 
-mongoose.connection.on("error", () => {
+mongoose.connection.on('error', () => {
   throw new Error(`Unable to connect to database: ${config.db}.`);
 });
 
