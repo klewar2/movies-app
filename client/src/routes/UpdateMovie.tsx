@@ -9,7 +9,6 @@ import {
   Spinner,
 } from 'reactstrap';
 import { useMutation } from '@apollo/react-components';
-import CREATE_MOVIE from '../graphql/mutation/createMovie';
 import { useHistory, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import UPDATE_MOVIE from '../graphql/mutation/updateMovie';
@@ -21,7 +20,7 @@ interface ParamTypes {
 }
 
 const UpdateMovie = () => {
-  const [updateMovie] = useMutation(CREATE_MOVIE);
+  const [updateMovie] = useMutation(UPDATE_MOVIE);
   const [form, setForm] = useState({
     name: '',
     description: '',

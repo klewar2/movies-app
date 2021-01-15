@@ -1,6 +1,6 @@
-import { gql } from "apollo-server-express";
-import { ApolloServerExpressConfig } from "apollo-server-express";
-import resolvers from "../resolvers";
+import { gql } from 'apollo-server-express';
+import { ApolloServerExpressConfig } from 'apollo-server-express';
+import resolvers from '../resolvers';
 
 const typeDefs = gql`
   type Query {
@@ -31,7 +31,7 @@ const schema: ApolloServerExpressConfig = {
   typeDefs,
   resolvers,
   introspection: true,
-  playground: true,
+  playground: true
 };
 
 export default schema;

@@ -1,10 +1,10 @@
-import { PubSub } from "apollo-server";
-import mongoose from "mongoose";
-import Movie from "../../../models/movie";
-import { transformMovie } from "./merge";
+import { PubSub } from 'apollo-server';
+import mongoose from 'mongoose';
+import Movie from '../../../models/movie';
+import { transformMovie } from './merge';
 
 const pubsub = new PubSub();
-const MOVIE_ADDED = "MOVIE_ADDED";
+const MOVIE_ADDED = 'MOVIE_ADDED';
 
 /**
  * Movie Queries
@@ -25,7 +25,7 @@ const MovieQueries = {
     } catch (err) {
       throw err;
     }
-  },
+  }
 };
 
 /**
@@ -37,12 +37,12 @@ const MovieMutations = {
       const newMovie = new Movie({
         _id: new mongoose.Types.ObjectId(),
         name: movieInput.name,
-        description: movieInput.description,
+        description: movieInput.description
       });
 
       const savedMovie = await newMovie.save();
       pubsub.publish(MOVIE_ADDED, {
-        movieAdded: transformMovie(savedMovie),
+        movieAdded: transformMovie(savedMovie)
       });
 
       return savedMovie;
@@ -53,17 +53,17 @@ const MovieMutations = {
   updateMovie: async (parent: any, { movieId, updateMovie }) => {
     try {
       const movie = await Movie.findByIdAndUpdate(movieId, updateMovie, {
-        new: true,
+        new: true
       });
       return transformMovie(movie);
     } catch (err) {
       throw err;
     }
-  },
+  }
 };
 
 const MovieSubscription = {
-  movieAdded: () => pubsub.asyncIterator([MOVIE_ADDED]),
+  movieAdded: () => pubsub.asyncIterator([MOVIE_ADDED])
 };
 
 export { MovieQueries, MovieMutations, MovieSubscription };
